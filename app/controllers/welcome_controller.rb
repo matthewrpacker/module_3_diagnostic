@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @connection = Faraday.get "https://kM71RdxKpMZmTXWP3q36xEAGSruLqKmiMcBxSKKB@api.data.gov/nrel/alt-fuel-stations/v1.json?limit=1"
+    response = Faraday.get "https://api.data.gov/nrel/alt-fuel-stations/v1.json?limit=1&api_key=#{ENV['NREL_KEY']}"
+    @parsed_response = JSON.parse(response.body)
   end
 end
